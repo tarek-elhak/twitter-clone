@@ -52,3 +52,23 @@ exports.validateLoginData = function (data) {
 };
 exports.isEmpty = isEmpty;
 exports.isEmail = isEmail;
+exports.reduceUserDetails = (data) => {
+  let userProfileDetails = {};
+  // for Bio
+  if (!isEmpty(data.bio.trim())) {
+    userProfileDetails.bio = data.bio;
+  }
+  // for website
+  if (!isEmpty(data.website.trim())) {
+    if (data.website.trim().substring(0, 4) !== "http") {
+      userProfileDetails.website = "http://" + data.website.trim();
+    } else {
+      userProfileDetails = data.website;
+    }
+  }
+  // for location
+  if (!isEmpty(data.location.trim())) {
+    userProfileDetails.location = data.location;
+  }
+  return userProfileDetails;
+};
